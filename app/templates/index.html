@@ -1,12 +1,8 @@
+{% extends 'base.html'%}
 {% import "macros.html" as macro%}
 
-
+{% block newsSource %}
 {{macro.display(general)}}
-<!-- <h3> Popular Movies</h3>
-         <ul>
-            {% for popular_movie in general %}
-                <li>{{ popular_movie.name}}</li>
-            {% endfor %}
-        </ul> -->
+{% endblock newsSource %}
 
 
