@@ -6,7 +6,7 @@ from .models import news_source
 News = news_source.NewsSource
 api_key = app.config['NEWS_API_KEY']
 sources_url = app.config['SOURCE_API_BASE_URL']
-article_url = app.config['SOURCE_API_BASE_URL']
+article_url = app.config['ARTICLE_API_BASE_URL']
 
 def get_news():
     '''
@@ -16,32 +16,32 @@ def get_news():
 
     with urllib.request.urlopen(get_news_url) as url:
         get_news_data = url.read()
-        get_news_response = json.loads(get_news_data)
+        source_articles_response = json.loads(get_news_data)
 
         sources_results = None
 
-        if get_news_response['sources']:
-            news_results_list = get_news_response['sources']
+        if source_articles_response['sources']:
+            news_results_list = source_articles_response['sources']
             sources_results = process_results(news_results_list)
 
     return sources_results
 
-def process_results(news_list):
+def process_results(source_list):
     '''
-    Function  that processes the news article result and transform them to a list of Objects
+    Function  that processes the news source result and transform them to a list of Objects
 
     Args:
-        news_list: A list of dictionaries that contain movie details
+        source_list: A list of dictionaries that contain movie details
 
     Returns :
-        sources_results: A list of news article sources objects
+        sources_results: A list of news article articles objects
     '''
     sources_results = []
-    for news_item in news_list:
-        id = news_item.get('id')
-        name = news_item.get('name')
-        description = news_item.get('description')
-        category = news_item.get('category')
+    for source_item in source_list:
+        id = source_item.get('id')
+        name = source_item.get('name')
+        description = source_item.get('description')
+        category = source_item.get('category')
 
         source_object = News(id,name,description,category)
         sources_results.append(source_object)
@@ -50,21 +50,37 @@ def process_results(news_list):
 
 
 def get_articles(id):
-    get_movie_details_url = base_url.format(id,api_key)
+    get_source_articles_url = article_url.format(id,api_key)
 
-    with urllib.request.urlopen(get_movie_details_url) as url:
-        movie_details_data = url.read()
-        movie_details_response = json.loads(movie_details_data)
+    with urllib.request.urlopen(get_source_articles_url) as url:
+        source_articles_data = url.read()
+        source_articles_response = json.loads(source_articles_data)
 
-        movie_object = None
-        if movie_details_response:
-            id = movie_details_response.get('id')
-            title = movie_details_response.get('original_title')
-            overview = movie_details_response.get('overview')
-            poster = movie_details_response.get('poster_path')
-            vote_average = movie_details_response.get('vote_average')
-            vote_count = movie_details_response.get('vote_count')
+        articles_results = None
+        if source_articles_response['articles']:
+            news_results_list = source_articles_response['articles']
+            sources_articles = process_articles(news_results_list)
 
-            movie_object = Movie(id,title,overview,poster,vote_average,vote_count)
+    return articles_results
 
-    return movie_object
+def process_articles(articles_list):
+    """
+    Function  that processes the news_articles result and transform them to a list of Objects
+
+    Args:
+        source_list: A list of dictionaries that contain movie details
+
+    Returns :
+        article_results: A list of news article articles objects
+    """
+    sources_results = []
+    for source_item in articles_list:
+        title = source_item.get('title')
+        description = source_item.get('description')
+        url = source_item.get('url')
+        urlToImage = source_item.get('urlToImage')
+
+        source_object = News(title,description,url,urlToImage)
+        sources_results.append(source_object)
+
+    return sources_results
