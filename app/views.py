@@ -20,5 +20,6 @@ def article(article_id):
     View root page function that returns the index page and its data
     '''
     article = get_articles(article_id)
-    title = f'{article.title}'
+    title = 'Pata news'
+    print(article)
     return render_template('articles.html', title=title, articles=article)

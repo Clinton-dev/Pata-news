@@ -1,9 +1,11 @@
 from unicodedata import category
 from app import app
 import urllib.request,json
-from .models import news_source
+from .models import news_source,article
 
 News = news_source.NewsSource
+Article = article.Article
+
 api_key = app.config['NEWS_API_KEY']
 sources_url = app.config['SOURCE_API_BASE_URL']
 article_url = app.config['ARTICLE_API_BASE_URL']
@@ -59,7 +61,7 @@ def get_articles(id):
         articles_results = None
         if source_articles_response['articles']:
             news_results_list = source_articles_response['articles']
-            sources_articles = process_articles(news_results_list)
+            articles_results = process_articles(news_results_list)
 
     return articles_results
 
@@ -80,7 +82,7 @@ def process_articles(articles_list):
         url = source_item.get('url')
         urlToImage = source_item.get('urlToImage')
 
-        source_object = News(title,description,url,urlToImage)
+        source_object = Article(title,description,url,urlToImage)
         sources_results.append(source_object)
 
     return sources_results
