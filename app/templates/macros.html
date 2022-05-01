@@ -1,6 +1,15 @@
 
-{%macro display(list)%}
-    {% for source in list%}
-        {{source.name}}
+{%macro displaySources(list)%}
+{% for source in list%}
+<div class="card">
+    <div class="card-header">
+      {{source.category}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{source.name}}</h5>
+      <p class="card-text">{{source.description}}</p>
+      <a href="/articles/{{source.id}}" class="btn btn-primary">Read related articles</a>
+    </div>
+  </div>
     {%endfor%}
 {%endmacro%}
