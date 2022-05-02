@@ -2,13 +2,11 @@
 {% import 'macros.html' as macro%}
 
 {% block search %}
-    <div class="container">
-        <div class="row">
-            <h3> Found {{ news | count }} matches </h3>
-            <hr>
-            <ul>
-                {{ macro.displayArticles(news)}}
-            </ul>
-        </div>
+    <div class="row justify-content-center">
+        <h3> Found {{ news | count }} matches </h3>
+        <hr>
+        <ul>
+            {{ macro.displayArticles(news)}}
+        </ul>
     </div>
 {% endblock search %}
