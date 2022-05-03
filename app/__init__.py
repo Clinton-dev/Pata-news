@@ -3,6 +3,7 @@ from .config import DevConfig
 
 # Initializing application
 app = Flask(__name__,instance_relative_config = True)
+    # Initializing flask extensions
 
 # Setting up configuration
 app.config.from_object(DevConfig)
