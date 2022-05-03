@@ -8,7 +8,7 @@
 * Authors Info
 
 ### Description
-This is a web application that will help users to view a various list and preview news articles from various sources.
+This is a web application that will help users to view a various list and preview news articles from various sources using data form [NEWS API](https://newsapi.org/).
 
 The contents of the website are:
 1. User can see various news sources on the homepage of the application.
@@ -45,6 +45,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ### Author's Information
 [Clinton-dev](https://github.com/Clinton-dev)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
 
