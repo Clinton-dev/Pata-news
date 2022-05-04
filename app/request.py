@@ -1,14 +1,22 @@
 from unicodedata import category
-from app import app
+# from app import app
 import urllib.request,json
 from .models import news_source,article
 
 News = news_source.NewsSource
 Article = article.Article
 
-api_key = app.config['NEWS_API_KEY']
-sources_url = app.config['SOURCE_API_BASE_URL']
-article_url = app.config['ARTICLE_API_BASE_URL']
+api_key = None
+sources_url = None
+article_url = None
+
+def configure_request(app):
+    global api_key, sources_url, article_url
+    api_key = app.config['NEWS_API_KEY']
+    sources_url = app.config['SOURCE_API_BASE_URL']
+    article_url = app.config['ARTICLE_API_BASE_URL']
+
+
 
 def get_news():
     '''
@@ -19,7 +27,7 @@ def get_news():
     with urllib.request.urlopen(get_news_url) as url:
         get_news_data = url.read()
         source_articles_response = json.loads(get_news_data)
-
+        print(source_articles_response)
         sources_results = None
 
         if source_articles_response['sources']:

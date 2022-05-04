@@ -1,11 +1,11 @@
 from flask import render_template, request, url_for, redirect
-from app import app
-from .request import get_news,get_articles, search_news
+from . import main
+from ..request import get_news,get_articles, search_news
 
-app.config['SECRET_KEY'] = '3097c0d809dad8d3923f0afdb79f0e92'
+# main.config['SECRET_KEY'] = '3097c0d809dad8d3923f0afdb79f0e92'
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -21,7 +21,7 @@ def index():
     else:
         return render_template('index.html', title= title, sources=source)
 
-@app.route('/articles/<article_id>')
+@main.route('/articles/<article_id>')
 def article(article_id):
 
     '''
@@ -33,7 +33,7 @@ def article(article_id):
     return render_template('articles.html', title=title, articles=article)
 
 
-@app.route('/search/<news_name>')
+@main.route('/search/<news_name>')
 def search(news_name):
     """
     Display search results
