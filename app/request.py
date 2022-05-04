@@ -27,7 +27,7 @@ def get_news():
     with urllib.request.urlopen(get_news_url) as url:
         get_news_data = url.read()
         source_articles_response = json.loads(get_news_data)
-        print(source_articles_response)
+
         sources_results = None
 
         if source_articles_response['sources']:
