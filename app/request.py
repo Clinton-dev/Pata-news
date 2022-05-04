@@ -1,5 +1,5 @@
 from unicodedata import category
-from app import app
+# from app import app
 import urllib.request,json
 from .models import news_source,article
 
